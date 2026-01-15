@@ -1,8 +1,5 @@
 package Handlers;
 
-import Clases.Gestor;
-import Clases.Identificable;
-import Clases.JSONable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,25 +24,4 @@ public class JSONUtiles {
         return objeto.toString();
     }
 
-    /// Metodo que nos permite conseguir un JSONArray desde una coleccion generica (Serializacion)
-    public static <T extends JSONable<T> & Identificable> JSONArray gestorToArray(Gestor<T> gestor) {
-        JSONArray jsonArray = new JSONArray();
-
-        for (T elemento : gestor.obtenerColeccion()) {
-            jsonArray.put(elemento.toJSON());
-        }
-
-        return jsonArray;
-    }
-    /// Metodo que nos permite conseguir una lista desde un JSONArray (Deserializacion)
-    public static <T extends JSONable<T>> List<T> arrayToObjetos(JSONArray jsonArray, T tipoObjeto) throws JSONException {
-        List<T> lista = new ArrayList<>();
-        if (jsonArray != null) {
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObjeto = jsonArray.getJSONObject(i);
-                lista.add(tipoObjeto.fromJSON(jsonObjeto));
-            }
-        }
-        return lista;
-    }
 }
