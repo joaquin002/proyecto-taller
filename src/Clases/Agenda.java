@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 public class Agenda {
 
-   private LocalDate fecha;
-   private LocalTime hora;
    ArrayList<Turno> turnos;
+
+   public Agenda() {
+      this.turnos = new ArrayList<>();
+   }
 }
