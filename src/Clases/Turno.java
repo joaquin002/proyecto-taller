@@ -55,14 +55,49 @@ public class Turno {
     }
 
 
-    public void terminarTurno() {
-        this.estadoTurno = EstadoTurno.ATENDIDA;
+    public void terminarTurno() throws EstadoIncorrecto {
+        if(estadoTurno != EstadoTurno.EN_PROCESO) {
+            throw new EstadoIncorrecto("Solo se pueden finalizar trabajos que esten en proceso");
+        }
+        if(diagnostico.isEmpty() || diagnostico == null){
+            throw new EstadoIncorrecto("No se puede finalizar el trabajo sin dar un diagnostico");
+        }
+        this.estadoTurno = EstadoTurno.ATENDIDO;
     }
+
+
+    public void cancelarTurno() throws EstadoIncorrecto {
+
+        if(this.estadoTurno == EstadoTurno.ATENDIDO ||  this.estadoTurno == EstadoTurno.CANCELADO) {
+            throw new EstadoIncorrecto("El turno no se puede cancelar (Fue finalizado o ya cancelado)");
+        }
+        estadoTurno = EstadoTurno.CANCELADO;
+    }
+
+
+
 
 
     public int getIdTurno() {
         return idTurno;
     }
+
+    public TipoTurno getTipoTurno() {
+        return tipoTurno;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public MotivoTurno getMotivoTurno() {
+        return motivoTurno;
+    }
+
 
 
     @Override
