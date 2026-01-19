@@ -72,9 +72,10 @@ void main() throws EstadoIncorrecto, CitaInvalidaExcep, ExcepcionNoCoincide {
                             float mano = sc.nextFloat();
                             sc.nextLine();
 
-                            System.out.print("Fecha entrega (AAAA-MM-DD): ");
-                            LocalDate entrega = LocalDate.parse(sc.nextLine());
-
+                            System.out.print("Ingrese la cantidad de dias que va a tardar la reparacion: ");
+                            int cantDias = sc.nextInt();
+                            LocalDate entrega = LocalDate.now();
+                            entrega.plusDays(cantDias);
                             sistema.registrarDiagnosticoTurno(id, diag, rep, mano, entrega);
 
                             System.out.println("Diagnostico registrado");
@@ -152,7 +153,7 @@ void main() throws EstadoIncorrecto, CitaInvalidaExcep, ExcepcionNoCoincide {
                         } catch (Exception e) {
                             System.out.println("Error: " + e.getMessage());
                         }
-                  
+
                 }
                         break;
 
