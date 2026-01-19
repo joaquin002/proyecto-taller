@@ -11,5 +11,12 @@ public class Vehiculo {
     private HashSet<Turno> historialTaller;
 
 
-
+    public Vehiculo(String patente, String marca, String modelo, int kilometraje, Cliente duenio) {
+        this.patente = patente;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.kilometraje = kilometraje;
+        this.duenio = duenio;
+        this.historialTaller = new HashSet<>();
+    }
 }

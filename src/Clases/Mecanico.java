@@ -1,5 +1,7 @@
 package Clases;
 
+import Enums.HorarioTrabajo;
+
 public class Mecanico  extends Persona {
 
     private HorarioTrabajo turnoTrabajo;

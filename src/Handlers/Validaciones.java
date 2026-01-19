@@ -1,6 +1,6 @@
     package Handlers;
 
-    import Clases.Cita;
+    import Clases.Turno;
     import Excepciones.CitaInvalidaExcep;
     import Excepciones.ExcepcionFormatoNoValido;
     import Excepciones.ExcepcionNoCoincide;
@@ -118,13 +118,4 @@
             }
         }
 
-        public static boolean validarEdad(int edad) throws ExcepcionFormatoNoValido {
-            boolean valida = false;
-            if(edad<18 || edad>99){
-                throw new ExcepcionFormatoNoValido ("La persona debe tener entre 18 y 99 años.");
-            } else{
-                valida = true;
-            }
-            return valida;
-        }
     }
