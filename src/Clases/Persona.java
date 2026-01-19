@@ -16,4 +16,13 @@ public abstract class Persona {
         this.email = email;
         this.contrasenia = contrasenia;
     }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
 }

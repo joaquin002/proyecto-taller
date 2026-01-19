@@ -14,12 +14,15 @@ import java.util.ArrayList;
 public class Sistema {
 
         private ArrayList<Turno> turnos;
+        private ArrayList<Mecanico> mecanicos;
+        private ArrayList<Cliente> clientes;
+
 
     public Sistema() {
         this.turnos = new ArrayList<>();
+        this.mecanicos = new ArrayList<>();
+        this.clientes = new ArrayList<>();
     }
-
-
 
 
 
@@ -104,4 +107,31 @@ public class Sistema {
 
         return lista;
     }
+
+
+
+    ///  METODOS DE LOGIN
+
+    public Cliente loginCliente(String email, String password) {
+
+        for (Cliente c : clientes) {
+            if (c.getEmail().equalsIgnoreCase(email)
+                    && c.getContrasenia().equals(password)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Mecanico loginMecanico(String email, String password) {
+
+        for (Mecanico m : mecanicos) {
+            if (m.getEmail().equalsIgnoreCase(email)
+                    && m.getContrasenia().equals(password)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
 }
