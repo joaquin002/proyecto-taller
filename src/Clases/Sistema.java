@@ -36,7 +36,7 @@ public class Sistema {
         turnos.add(t);
     }
 
-    public void registrarDiagnosticoTurno( int ID, String diagnostico, float costoRepuestos, float costoManoObra, int plazoEntrega) throws CitaInvalidaExcep,EstadoIncorrecto {
+    public void registrarDiagnosticoTurno( int ID, String diagnostico, float costoRepuestos, float costoManoObra, LocalDate plazoEntrega) throws CitaInvalidaExcep,EstadoIncorrecto {
 
         Turno t = buscarTurnoID(ID);
         if (t!= null){

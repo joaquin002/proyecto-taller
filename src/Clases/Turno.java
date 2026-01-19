@@ -18,11 +18,13 @@ public class Turno {
     private MotivoTurno motivoTurno;
     private Vehiculo vehiculo;
     private Cliente duenio;
-    private String diagnostico;
     private EstadoTurno estadoTurno;
+
+    /// Reparacion
+    private String diagnostico;
     private float costoRepuestos;
     private float costoManoObra;
-    private int plazoEntrega;
+    private LocalDate fechaEntregaEstimada;
 
 
     public Turno(LocalDate fecha, LocalTime hora, TipoTurno tipoTurno, MotivoTurno motivoTurno, Vehiculo vehiculo, Cliente duenio) {
@@ -41,15 +43,18 @@ public class Turno {
 
 
 
-    public void registrarDiagnostico(String diagnostico, float costoRepuestos, float costoManoObra, int plazoEntrega) throws EstadoIncorrecto {
+    public void registrarDiagnostico(String diagnostico, float costoRepuestos, float costoManoObra, LocalDate fechaEntregaEstimada) throws EstadoIncorrecto {
 
         if(this.estadoTurno != EstadoTurno.PENDIENTE) {
             throw  new EstadoIncorrecto("Solo se puede diagnosticar un turno pendiente");
         }
+        if(fechaEntregaEstimada.isBefore(fecha)) {
+            throw new EstadoIncorrecto("La fecha de entrega no puede ser anterior a la del turno");
+        }
         this.diagnostico = diagnostico;
         this.costoRepuestos = costoRepuestos;
         this.costoManoObra = costoManoObra;
-        this.plazoEntrega = plazoEntrega;
+        this.fechaEntregaEstimada = fechaEntregaEstimada;
         this.estadoTurno = EstadoTurno.EN_PROCESO;
 
     }
@@ -74,7 +79,39 @@ public class Turno {
         estadoTurno = EstadoTurno.CANCELADO;
     }
 
+/// metodos que vamos a implementar mas adelante
+/*
+    public boolean estaAtrasado() {
+    return estadoTurno != EstadoTurno.FINALIZADO &&
+           fechaEstimadaEntrega != null &&
+           LocalDate.now().isAfter(fechaEstimadaEntrega);
+}
 
+public long diasRestantes() {
+    if (fechaEstimadaEntrega == null) return 0;
+    return ChronoUnit.DAYS.between(LocalDate.now(), fechaEstimadaEntrega);
+}
+
+public void reprogramarEntrega(LocalDate nuevaFechaEntrega)
+        throws EstadoIncorrecto {
+
+    if (estadoTurno != EstadoTurno.EN_PROCESO) {
+        throw new EstadoIncorrecto(
+            "Solo se puede reprogramar un turno en proceso"
+        );
+    }
+
+    if (nuevaFechaEntrega.isBefore(LocalDate.now())) {
+        throw new EstadoIncorrecto(
+            "La nueva fecha no puede ser anterior a hoy"
+        );
+    }
+
+    this.fechaEstimadaEntrega = nuevaFechaEntrega;
+}
+
+
+ */
 
 
 
@@ -114,7 +151,7 @@ public class Turno {
                 ", estadoTurno=" + estadoTurno +
                 ", costoRepuestos=" + costoRepuestos +
                 ", costoManoObra=" + costoManoObra +
-                ", plazoEntrega=" + plazoEntrega +
+                ", plazoEntrega=" + fechaEntregaEstimada +
                 '}';
     }
 }
